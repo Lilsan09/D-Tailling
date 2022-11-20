@@ -26,7 +26,7 @@ define('PWD', 'admin');
 
 
 // Formateur de date ( echo $formatLongFr->format(strtotime("date en texte")) )
-$formatLongFr = new IntlDateFormatter(
-    locale : 'fr_FR',
-    pattern : "EEEE dd MMMM Y 'à' HH'h'mm"
-);
+// $formatLongFr = new IntlDateFormatter(
+//     locale : 'fr_FR',
+//     pattern : "EEEE dd MMMM Y 'à' HH'h'mm"
+// );
