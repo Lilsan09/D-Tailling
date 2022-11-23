@@ -1,52 +1,44 @@
 <?php
-require_once(__DIR__.'/../config/config.php');
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-   ////////////////////////////////////////////////////////////////
-   //////////////////////////// NETTOYAGE//////////////////////////
-   ////////////////////////////////////////////////////////////////
-   $lastname = trim(filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_SPECIAL_CHARS));
-   $firstname = trim(filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_SPECIAL_CHARS));
-   $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
-   $zipcode = filter_input(INPUT_POST, 'zipcode', FILTER_SANITIZE_NUMBER_INT);
-   $password = trim(filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS));
-   $confirmpassword = trim(filter_input(INPUT_POST, 'confirmpassword', FILTER_SANITIZE_SPECIAL_CHARS));
+require_once(__DIR__ . '/../config/config.php');
+require_once(__DIR__ . '/../models/User.php');
+try {
+   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      ////////////////////////////////////////////////////////////////
+      //////////////////////////// NETTOYAGE//////////////////////////
+      ////////////////////////////////////////////////////////////////
+      $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
+      $password = filter_input(INPUT_POST, 'password');
 
-////////////////// NOM ///////////////////
-if (empty($lastname)) {
-   $errorLastname = 'Champ obligatoire';
-   $globalError = 1;
-} else {
-   $isOk = filter_var($lastname, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEX_NO_NUMBER . '/')));
-   if ($isOk == false) {
-      $errorLastname = 'Nom pas conforme';
-      $globalError = 1;
-      var_dump($errorLastname);
+      ///////////////// MAIL //////////////////
+      if (empty($email)) {
+         $errors['email'] = 'Champ obligatoire';
+      } else {
+         $isOk = filter_var($email, FILTER_VALIDATE_EMAIL, array("options" => array("regexp" => '/' . REGEX_EMAIL . '/')));
+         if (!$isOk) {
+            $errors['email'] = 'Adresse mail non valide';
+         }
+      }
+      // /////////////// MOT DE PASSE //////////////////
+      $user = User::loginByMail($email);
+      //$password_hash = $user->getPassword();
+      $password_hash = $user->password;
+      $result = password_verify($password, $password_hash);
+      if (!$result) {
+         $errors['password'] = 'Les informations des connexion ne sont pas bonnes!';
+      }
+
+      if (empty($errors)) {
+         //$user->setPassword(null);
+         $user->password = null;
+         $_SESSION['user'] = $user;
+         header('Location: /controllers/homeCtrl.php');
+         exit();
+      }
    }
-}
-///////////////// PRÉNOM //////////////////
-if (empty($firstname)) {
-   $errorFirstname = 'Champ obligatoire';
-   $globalError = 1;
-} else {
-   $isOk = filter_var($firstname, FILTER_VALIDATE_REGEXP, array("options" => array("regexp" => '/' . REGEX_NO_NUMBER . '/')));
-   if ($isOk == false) {
-      $errorFirstname = 'Champ obligatoire';
-      $globalError = 1;
-   }
-}
-///////////////// MAIL //////////////////
-if (empty($email)) {
-   $errorMail = 'Champ obligatoire';
-   $globalError = 1;
-} else {
-   $isOk = filter_var($email, FILTER_VALIDATE_EMAIL, array("options" => array("regexp" => '/' . REGEX_EMAIL . '/')));
-   if (!$isOk) {
-      $errorMail = 'Adresse mail non valide';
-      $globalError = 1;
-   }
-}
+} catch (PDOException $e) {
+   die('Erreur : ' . $e->getMessage());
 
 }
-   include(__DIR__.'/../views/templates/header.php');
-   include(__DIR__.'/../views/connexion.php');
-   include(__DIR__.'/../views/templates/footer.php');
+include(__DIR__ . '/../views/templates/header.php');
+include(__DIR__ . '/../views/connexion.php');
+include(__DIR__ . '/../views/templates/footer.php');

@@ -7,20 +7,17 @@
       </div>
    <?php } ?>
    <section class="highPage">
-      <div class="container-fluid bgHeader">
+      <div class="container-fluid bgHeader d-flex justify-content-center align-items-center">
          <div class="row justify-content-center">
-            <div class="col-10 text-center">
-               <h1 id="zeH1">Bienvenue chez <br> <span class="dtailing">D-TAILING</span></h1>
+            <div class="col-10 aboutDiv p-5 text-center">
+            <?php if (isset($_SESSION['user'])) { ?>
+                  <h2 class="text-black mb-5">Bonjour <span class=" text-decoration-underline"><?= $_SESSION['user']->firstname . ',' ?? ''?></span></h2>
+               <?php } ?>
+               <h1 class="mb-5" id="zeH1">Bienvenue chez <br> <span class="dtailing">D-TAILING</span></h1>
                <h3 class="text-black">Le lavage auto profesionnel de qualité</h3>
-            </div>
-            <div class="col-10 aboutDiv">
-               <p class="aboutText text-black p-2">
-                  Le Detailing Automobile est une technique visant à sublimer l’extérieur comme l’intérieur d’un véhicule par des techniques de nettoyage professionnelles agissant en profondeur sur la carrosserie.
-                  <br>
-                  En effet, votre véhicule va faire l’objet pendant cette rénovation d’une attention toute particulière afin de lui redonner l’éclat et la brillance d’un véhicule neuf.
-                  <br>
+               <!-- <p class="aboutText text-black p-2">
                   En confiant votre véhicule à <span class="dtailing">D-TAILING</span>, vous le laissez entre les mains expertes d’un technicien hors pair, doublé d’un esthète. Vous aurez affaire à un amoureux des belles mécaniques, un passionné méticuleux, un fervent connaisseur de l’histoire de l’automobile et des marques.
-               </p>
+               </p> -->
             </div>
          </div>
       </div>

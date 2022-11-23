@@ -2,8 +2,6 @@
     box-sizing: border-box;
 }
 
-
-
 /* Span */
 .dtailing {
     color: #e10000;
@@ -57,10 +55,31 @@
 
 /* Connexion formulaire */
 .connexionForm {
-    height: auto;
+    height: fit-content;
+    min-height: 90vh;
+    background-image: url(/public/assets/img/ouiouioui.jpg);
+    object-fit: cover;
+}
+.glassForm {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 20px;
+    height: 80%;
+    width: 95%;
+    /* margin: 10px; */
 }
 .createAcc {
     font-size: 0.8rem;
+    text-align: center;
+}
+/* Inscription Formulaire */
+.inscriptionForm {
+    height: auto;
+    background-image: url(/public/assets/img/ouiouioui.jpg);
+    object-fit: cover;
 }
 
 /* About */
@@ -122,9 +141,12 @@
     height: 100%;
     width: 100%;
     object-fit: cover;
-    filter: blur(5px);
-    filter: grayscale(60%);
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgb(0, 0, 0) 29%, rgba(115,115,115,0.8169861694677871) 75%, rgba(247,247,247,0.517266281512605) 100%);
+    filter: blur(2px) brightness(0.5) grayscale(0.6);
 }
+
+
 
 /* Contact Formulaire */
 .contactForm {

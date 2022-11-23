@@ -1,20 +1,16 @@
-<form class="connexionForm container" method="POST">
-   <fieldset class="row">
-      <legend>Se connecter</legend>
-      <div class="form-group">
-         <label for="exampleInputEmail1" class="form-label mt-4">Adresse Mail</label>
-         <input type="email" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-         <small id="emailHelp" class="form-text text-muted">Nous ne partagerons jamais votre adresse mail</small>
+<form action="/controllers/connexionCtrl.php" class="connexionForm container-fluid d-flex align-items-center justify-content-center" method="POST">
+   <fieldset class="row justify-content-center glassForm">
+      <legend class="text-center mt-4">Se connecter</legend>
+      <p><?= $errors['password'] ?? '' ;?></p>
+      <div class="form-group col-lg-10 m-3">
+         <label for="email" class="form-label">Adresse Mail</label>
+         <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="exemple@mail.com">
       </div>
-      <div class="form-group">
-         <label for="exampleInputPassword1" class="form-label mt-4">Mot de passe</label>
-         <input type="password" class="form-control form-control-sm" id="exampleInputPassword1" placeholder="Password">
+      <div class="form-group col-lg-10 m-3">
+         <label for="password" class="form-label">Mot de passe</label>
+         <input name="password" type="password" class="form-control" id="password" placeholder="******">
       </div>
-      <!-- <div class="form-group">
-         <label for="exampleInputPassword1" class="form-label mt-4">Confirmer le mot de passe</label>
-         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-      </div> -->
-      <p class="createAcc">Vous n'avez pas de compte ? <a class="createAcc text-decoration-none" href="../controllers/inscriptionCtrl.php"><span class="dtailing"> Créer un compte</span></a> maintenant !</p>
-      <button type="submit" class="btn btn-primary">Connexion</button>
+      <button type="submit" class="btn btn-primary col-8 col-lg-3 m-4">Connexion</button>
+      <p class="createAcc text-black">Vous n'avez pas de compte ?<a class="createAcc text-decoration-none" href="../controllers/inscriptionCtrl.php"><span class="dtailing"> Créer un compte</span></a> maintenant !</p>
    </fieldset>
 </form>
