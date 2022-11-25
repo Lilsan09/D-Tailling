@@ -20,6 +20,8 @@ define('REGEX_PHONE', '^(\+33|0|0033)[1-9]((\-|\/|\.)?\d{2}){4}$');
 
 define('REGEX_DATE_HOUR',"^\d{4}-\d{2}-\d{1,2}$");
 
+// On definit le nombre d'éléments par page
+define('NB_ELEMENTS_BY_PAGE', 10);
 
 
 // BASE DE DONNEES

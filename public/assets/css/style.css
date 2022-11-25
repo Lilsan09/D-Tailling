@@ -4,26 +4,24 @@
 
 /* Span */
 .dtailing {
-    color: #e10000;
+    color: #ac0303;
     font-weight: 600;
 }
-
 
 /* Separation */
 .sep {
     display: flex;
     width: 100vw;
     justify-content: center;
-    /* background-color: #fff; */
+   /* background-color: #fff; */
 }
 .separate {
     background-color: #585858;
     height: 1px;
     width: 80vw;
     margin: 30px 0;
-    /* position: relative; */
+   /* position: relative; */
 }
-
 
 /* NAVBAR */
 .navbar {
@@ -31,16 +29,14 @@
     z-index: 999;
 }
 
-
 /* H1/LOGO */
 #zeH1 {
     color: #212529;
 }
 .logo {
     height: 50px;
-    /* color: #000; */
+   /* color: #000; */
 }
-
 
 /* 'Header du site' */
 .bgHeader {
@@ -51,7 +47,6 @@
     background-size: cover;
     height: 90vh;
 }
-
 
 /* Connexion formulaire */
 .connexionForm {
@@ -69,7 +64,7 @@
     padding: 20px;
     height: 80%;
     width: 95%;
-    /* margin: 10px; */
+   /* margin: 10px; */
 }
 .createAcc {
     font-size: 0.8rem;
@@ -94,7 +89,6 @@
     -webkit-backdrop-filter: blur(10px);
     border-radius: 10px;
 }
-
 
 /* Prestation */
 .card-title {
@@ -141,12 +135,15 @@
     height: 100%;
     width: 100%;
     object-fit: cover;
-    background: rgb(0,0,0);
-    background: linear-gradient(0deg, rgb(0, 0, 0) 29%, rgba(115,115,115,0.8169861694677871) 75%, rgba(247,247,247,0.517266281512605) 100%);
+    background: rgb(0, 0, 0);
+    background: linear-gradient(
+        0deg,
+        rgb(0, 0, 0) 29%,
+        rgba(115, 115, 115, 0.8169861694677871) 75%,
+        rgba(247, 247, 247, 0.517266281512605) 100%
+    );
     filter: blur(2px) brightness(0.5) grayscale(0.6);
 }
-
-
 
 /* Contact Formulaire */
 .contactForm {
@@ -158,3 +155,12 @@
     width: 20px;
     height: 20px;
 }
+
+.alertSession {
+    background-color: rgb(33 37 41);
+}
+.alert {
+    border-radius: 0;
+}
+
+

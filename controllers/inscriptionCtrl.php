@@ -41,6 +41,9 @@
             if (!$isOk) {
                $errors['email'] = 'Adresse mail non valide';
             }
+            if (User::checkEmail($email)) {
+               $errors['email'] = 'Cette adresse mail est déjà utilisée';
+            }
          }
 
       ///////////////// ADRESS //////////////////
