@@ -14,7 +14,7 @@
          public function getId(){
             return $this->id;
          }
-         public function gettitle(){
+         public function getTitle(){
             return $this->title;
          }
          public function getDescription(){
@@ -80,7 +80,7 @@
                }
             }
          // Methode pour modifier une prestation
-            public function update($id){
+            public function modify($id){
                $sth = Database::getInstance()->prepare('UPDATE `prestations` SET `title` = :title, `description` = :description, `price` = :price WHERE `Id_prestations` = :id');
                $sth->bindValue(':id', $id, PDO::PARAM_INT);
                $sth->bindValue(':title', $this->title, PDO::PARAM_STR);

@@ -30,7 +30,7 @@
             </div> -->
             <?php foreach ($prestations as $prestation) { ?>
                <div class="carousel-item active">
-                  <img src="../public/uploads/<?= $prestation->Id_prestations . $extension?>" class="d-block w-100 imgPrestation" alt="<?=$prestation->title?>">
+                  <img src="../public/uploads/<?= $prestation->Id_prestations?>.jpeg" class="d-block w-100 imgPrestation" alt="<?=$prestation->title?>">
                   <div class="carousel-caption d-md-block">
                      <h5 class="text-danger"><?= $prestation->title ?></h5>
                      <p><?= $prestation->description ?></p>
