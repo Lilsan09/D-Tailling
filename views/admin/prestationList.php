@@ -42,7 +42,7 @@ if (SessionFlash::exist()) {
             <?php } ?>
          </tbody>
       </table>
-      <a href="/controllers/admin/addPrestationCtrl.php">
+      <a class="text-center" href="/controllers/admin/addPrestationCtrl.php">
          <button class="btn btn-primary" type="button">Ajouter une prestation</button>
       </a>
    </div>
