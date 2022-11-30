@@ -4,12 +4,8 @@
    require_once(__DIR__ . '/../helpers/SessionFlash.php');
    require_once(__DIR__ . '/../models/Prestation.php');
 
-   if (!isset($_SESSION['user'])) {
-      header('location: /controllers/connexionCtrl.php');
-      exit;
-   } else {
-      $prestations = Prestation::displayAll();
-   }
+   
+   $prestations = Prestation::displayAll();
 
 
 

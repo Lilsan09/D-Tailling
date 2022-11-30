@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . '/../config/config.php');
 require_once(__DIR__ . '/../models/User.php');
+
 try {
    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       ////////////////////////////////////////////////////////////////

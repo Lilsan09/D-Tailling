@@ -14,10 +14,10 @@
    <title>D-Tailling</title>
 </head>
 
-<body>
+<body class="bg-secondary">
    <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
-         <div class="container bg-secondary">
+      <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+         <div class="container-fluid bg-secondary">
             <a class="navbar-brand" href="/controllers/admin/dashboardCtrl.php"><img src="/public/assets/img/logolightDtailing.png" alt="Logo D-Tailing" class="logo">
                <span class="visually-hidden">(current)</span>
             </a>
@@ -26,11 +26,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarColor02">
                <ul class="navbar-nav me-auto">
-                  <!-- <li class="nav-item">
-                     <a class="nav-link active" href="/controllers/homeCtrl.php">Accueil
-                        <span class="visually-hidden">(current)</span>
-                     </a>
-                  </li> -->
                   <li class="nav-item">
                      <a class="nav-link" href="/controllers/admin/userListCtrl.php"><span class="text-dark">Utilisateurs</span></a>
                   </li>
@@ -38,7 +33,7 @@
                      <a class="nav-link" href="/controllers/admin/appointmentListCtrl.php"><span class="text-dark">Rendez-Vous</span></a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="/controllers/admin/editPrestationCtrl.php"><span class="text-dark">Prestations</span></a>
+                     <a class="nav-link" href="/controllers/admin/prestationListCtrl.php"><span class="text-dark">Prestations</span></a>
                   </li>
                   <li class="nav-item">
                      <?php if (isset($_SESSION['user'])) { ?>
@@ -47,16 +42,16 @@
                         <a class="nav-link text-dark" href="/controllers/connexionCtrl.php">Connexion</a>
                      <?php } ?>
                   </li>
-                  <?php if (isset($_SESSION['user'])) { ?>
+               </ul>
+               <?php if (isset($_SESSION['user'])) { ?>
+                  <ul class="navbar-nav">
                      <li class="nav-item">
-                        <a class="nav-link" href="/controllers/profilUserCtrl.php">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z" />
-                           </svg>
+                        <a class="nav-link h-100 align-self-end text-dark" href="/controllers/homeCtrl.php">
+                           Retour au site
                         </a>
                      </li>
                   <?php } ?>
-               </ul>
+                  </ul>
             </div>
          </div>
       </nav>

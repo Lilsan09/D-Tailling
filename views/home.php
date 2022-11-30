@@ -1,5 +1,6 @@
 <main>
    <?php
+   // Affichage des messages flash
    if (SessionFlash::exist()) { ?>
       <div class="alert alert-dismissible alert-secondary">
          <?= SessionFlash::get(); ?>
@@ -9,15 +10,12 @@
    <section class="highPage">
       <div class="container-fluid bgHeader d-flex justify-content-center align-items-center">
          <div class="row justify-content-center">
-            <div class="col-10 aboutDiv p-5 text-center">
+            <div class="col-lg-12 col-10 aboutDiv p-5 text-center">
             <?php if (isset($_SESSION['user'])) { ?>
-                  <h2 class="text-black mb-5">Bonjour <span class=" text-decoration-underline"><?= $_SESSION['user']->firstname . ',' ?? ''?></span></h2>
+                  <h2 class="text-black mb-5">Bonjour <span><?= $_SESSION['user']->firstname . ',' ?? ''?></span></h2>
                <?php } ?>
                <h1 class="mb-5" id="zeH1">Bienvenue chez <br> <span class="dtailing">D-TAILING</span></h1>
-               <h3 class="text-black">Le lavage auto profesionnel de qualité</h3>
-               <!-- <p class="aboutText text-black p-2">
-                  En confiant votre véhicule à <span class="dtailing">D-TAILING</span>, vous le laissez entre les mains expertes d’un technicien hors pair, doublé d’un esthète. Vous aurez affaire à un amoureux des belles mécaniques, un passionné méticuleux, un fervent connaisseur de l’histoire de l’automobile et des marques.
-               </p> -->
+               <h3 class="text-black">Le lavage auto profesionnel</h3>
             </div>
          </div>
       </div>

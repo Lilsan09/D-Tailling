@@ -9,11 +9,11 @@ if (SessionFlash::exist()) {
 
 <?php
 ?>
-<h1>Liste des prestations</h1>
 
-<div class="container">
+<div class="container-fluid bg-dark minH90 h-100 d-flex align-items-center">
    <div class="row">
-      <table class="table table-striped">
+      <h1>Liste des prestations</h1>
+      <table class="table table-striped my-5 px-5">
          <thead>
             <tr>
                <th scope="col" class="text-secondary">Titre</th>

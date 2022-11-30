@@ -4,10 +4,15 @@ require_once(__DIR__ . '/../../helpers/SessionFlash.php');
 require_once(__DIR__ . '/../../helpers/database.php');
 require_once(__DIR__ . '/../../models/User.php');
 
-// if (!isset($_SESSION['user'])) {
-//    header('location: /controllers/connexionCtrl.php');
-//    exit;
-// } else {
+if (!isset($_SESSION['user'])) {
+   header('location: /controllers/connexionCtrl.php');
+   exit;
+} else {
+   if ($_SESSION['user']->role != 1) {
+      header('location: /controllers/homeCtrl.php');
+      exit;
+   }
+}
    $id = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
    $user = User::displayOne($id);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -91,6 +96,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       //    $errors['email'] = 'Le mail existe déjà';
       // }
    }
+
+   /*************************** ROLE **************************/
+   //**** NETTOYAGE ****/
+   $role = trim(filter_input(INPUT_POST, 'role', FILTER_SANITIZE_NUMBER_INT));
+
+   //**** VERIFICATION ****/
+   if (empty($role)) {
+      $errors['role'] = 'Le champ est obligatoire';
+   } else {
+      $isOk = filter_var($role, FILTER_VALIDATE_INT);
+      if (!$isOk) {
+         $errors['role'] = 'Le role n\'est pas valide';
+      }
+   }
+
    /***********************************************************/
 
    // Si il n'y a pas d'erreurs, on met à jour le patient.
@@ -105,6 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $userModified->setEmail($email);
       $userModified->setAdress($adress);
       $userModified->setZipcode($zipcode);
+      $userModified->setRole($role);
 
       $userModified->modify($id);
       // On récupère les données de l'utilisateur mis à jour
@@ -117,6 +138,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          die;
       }
    }
-include(__DIR__ . '/../../views/templates/header.php');
+include(__DIR__ . '/../../views/templates/sidebar.php');
 include(__DIR__ . '/../../views/admin/editUser.php');
-include(__DIR__ . '/../../views/templates/footer.php');
+include(__DIR__ . '/../../views/templates/lightFooter.php');

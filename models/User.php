@@ -46,6 +46,10 @@ class User
    {
       return $this->phone;
    }
+   public function getRole()
+   {
+      return $this->role;
+   }
 
    // Setters
    public function setId($id)
@@ -79,6 +83,10 @@ class User
    public function setPhone($phone)
    {
       $this->phone = $phone;
+   }
+   public function setRole($role)
+   {
+      $this->role = $role;
    }
 
 
@@ -129,7 +137,7 @@ class User
       // Methode pour modifier les informations d'un utilisateur
          public function modify($id)
          {
-            $sth = Database::getInstance()->prepare('UPDATE `users` SET `lastname` = :lastname, `firstname` = :firstname, `email` = :email, `adress` = :adress, `zipcode` = :zipcode, `phone` = :phone WHERE `Id_users` = :id');
+            $sth = Database::getInstance()->prepare('UPDATE `users` SET `lastname` = :lastname, `firstname` = :firstname, `email` = :email, `adress` = :adress, `zipcode` = :zipcode, `phone` = :phone, `role` = :role WHERE `Id_users` = :id');
             $sth->bindValue(':id', $id, PDO::PARAM_INT);
             $sth->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
             $sth->bindValue(':firstname', $this->firstname, PDO::PARAM_STR);
@@ -137,6 +145,7 @@ class User
             $sth->bindValue(':adress', $this->adress, PDO::PARAM_STR);
             $sth->bindValue(':zipcode', $this->zipcode, PDO::PARAM_STR);
             $sth->bindValue(':phone', $this->phone, PDO::PARAM_STR);
+            $sth->bindValue(':role', $this->role, PDO::PARAM_INT);
             if ($sth->execute()) {
                $result = $sth->rowCount();
                return ($result >= 1) ? true : false;
@@ -211,21 +220,15 @@ class User
                return [];
             }
          }
-
-
-
-
-
-      // Methode pour modifier le mot de passe d'un utilisateur
-         // public function modifyPassword($id) {
-         //    $sth = Database::getInstance()->prepare('UPDATE `users` SET `password` = :password WHERE `Id_users` = :id');
-         //    $sth->bindValue(':id', $id, PDO::PARAM_INT);
-         //    $sth->bindValue(':password', $this->password, PDO::PARAM_STR);
-         //    if ($sth->execute()) {
-         //       $result = $sth->rowCount();
-         //       return ($result >= 1) ? true : false;
-         //    }
-         // }
-
-
-}
+         // methode pour modifier un mot de passe
+         public function modifyPassword($id)
+         {
+            $sth = Database::getInstance()->prepare('UPDATE `users` SET `password` = :password WHERE `Id_users` = :id');
+            $sth->bindValue(':id', $id, PDO::PARAM_INT);
+            $sth->bindValue(':password', $this->password, PDO::PARAM_STR);
+            if ($sth->execute()) {
+               $result = $sth->rowCount();
+               return ($result >= 1) ? true : false;
+            }
+         }
+      }

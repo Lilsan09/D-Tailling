@@ -5,6 +5,15 @@
 
 
    try {
+      if (!isset($_SESSION['user'])) {
+         header('location: /controllers/connexionCtrl.php');
+         exit;
+      } else {
+         if ($_SESSION['user']->role != 1) {
+            header('location: /controllers/homeCtrl.php');
+            exit;
+         }
+      }
       $id = intval(filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT));
       if (User::delete($id)){
          SessionFlash::set('Le compte a bien été supprimé');

@@ -10,9 +10,9 @@ if (SessionFlash::exist()) { ?>
       </div>
    </div>
 <?php } ?>
-<form class="bg-dark text-white container-fluid d-flex align-items-center justify-content-center" method="POST" novalidate>
+<form class="connexionForm container-fluid d-flex align-items-center justify-content-center" method="POST" novalidate>
    <fieldset class="row justify-content-center glassForm my-4">
-      <legend class="">Modifier les information de <?= $user->firstname . ' ' . $user->lastname ?></legend>
+      <legend class="">Mes informations</legend>
       <div class="form-group col-lg-6">
          <label for="email" class="form-label mt-4">Adresse Mail</label>
          <input value="<?= $user->email ?? $user->getEmail(); ?>" name="email" type="email" class="form-control" id="mail" aria-describedby="emailHelp" placeholder="exemple@mail.com" required>
@@ -43,19 +43,9 @@ if (SessionFlash::exist()) { ?>
          <input value="<?= $user->zipcode ?? $user->getZipcode(); ?>" name="zipcode" type="number" class="form-control" id="zipcode" placeholder="80000.." required>
          <p><?= $errors['zipcode'] ?? ''; ?></p>
       </div>
-      <div class="form-group col-lg-4">
-         <label for="role" class="form-label mt-4 ">Role</label>
-         <select name="role" id="role" class="form-control">
-            <option value="2" <?= $user->role == 2 ? 'selected' : ''; ?>>Utilisateur</option>
-            <option value="1" <?= $user->role == 1 ? 'selected' : ''; ?>>Administrateur</option>
-         </select>
-         <p><?= $errors['role'] ?? ''; ?></p>
-      </div>
-      <div class="d-flex justify-content-center">
-         <button type="submit" class="btn btn-primary col-lg-3 mt-4">Enregistrer les modifications</button>
-      </div>
+      <button type="submit" class="btn btn-primary col-8 col-lg-3 mt-4">Enregistrer les modifications</button>
       <a href="/controllers/deleteUserCtrl.php" class="text-decoration-none d-flex justify-content-end">
-         <button type="button" class="btn btn-sm my-5">Supprimer l'utilisateur</button>
+         <button type="button" class="btn btn-sm my-5">Supprimer mon compte</button>
       </a>
    </fieldset>
 </form>

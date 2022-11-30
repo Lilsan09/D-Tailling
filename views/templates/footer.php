@@ -34,4 +34,3 @@
    </body>
 
    </html>
-   <!-- JavaScript Bundle with Popper -->

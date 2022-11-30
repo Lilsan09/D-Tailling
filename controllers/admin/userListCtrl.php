@@ -3,13 +3,19 @@ require_once(__DIR__ . '/../../config/config.php');
 require_once(__DIR__ . '/../../models/User.php');
 require_once(__DIR__ . '/../../helpers/SessionFlash.php');
 require_once(__DIR__ . '/../../helpers/database.php');
-if (!isset($_SESSION['user'])) {
-   header('location: /controllers/connexionCtrl.php');
-   exit;
-}
 
 
 try {
+   if (!isset($_SESSION['user'])) {
+      header('location: /controllers/connexionCtrl.php');
+      exit;
+   } else {
+      if ($_SESSION['user']->role != 1) {
+         header('location: /controllers/homeCtrl.php');
+         exit;
+      }
+   }
+   
    // Récupération de la valeur recherchée et on nettoie
    //**** NETTOYAGE ****/
    $s = trim((string) filter_input(INPUT_GET, 's', FILTER_SANITIZE_SPECIAL_CHARS));
@@ -48,6 +54,6 @@ try {
 
 include(__DIR__ . '/../../views/templates/sidebar.php');
 include(__DIR__ . '/../../views/admin/userList.php');
-include(__DIR__ . '/../../views/templates/footer.php');
+include(__DIR__ . '/../../views/templates/lightFooter.php');
 
 /*************************************************************/

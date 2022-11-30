@@ -4,7 +4,12 @@ require_once(__DIR__ . '/../../config/config.php');
 require_once(__DIR__ . '/../../helpers/SessionFlash.php');
 require_once(__DIR__ . '/../../helpers/database.php');
 
+
 try {
+   if ($_SESSION['user']->role != 1) {
+      header('location: /controllers/homeCtrl.php');
+      exit;
+   }
    // Ajout d'une prestation
    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $title = trim(filter_input(INPUT_POST, 'title', FILTER_SANITIZE_SPECIAL_CHARS));
@@ -38,7 +43,7 @@ try {
          $prestation->setDescription($description);
          $prestation->setPrice($price);
          if ($IsPrestationAdded = $prestation->add()) {
-            $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/public/uploads/';
+            $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/public/uploads/prestations/';
             $sth = Database::getInstance();
             $lastInsertId = $sth->lastInsertId();
             $target_file = $lastInsertId . '.' . pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
@@ -64,4 +69,4 @@ try {
 }
 include(__DIR__ . '/../../views/templates/sidebar.php');
 include(__DIR__ . '/../../views/admin/addPrestation.php');
-include(__DIR__ . '/../../views/templates/footer.php');
+include(__DIR__ . '/../../views/templates/lightFooter.php');

@@ -48,6 +48,14 @@
     height: 90vh;
 }
 
+.imgBg {
+    background: url(/public/assets/img/ouiouioui.jpg) no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 /* Connexion formulaire */
 .connexionForm {
     height: fit-content;
@@ -56,7 +64,7 @@
     object-fit: cover;
 }
 .glassForm {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.468);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -83,7 +91,7 @@
 }
 
 .aboutDiv {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.468);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -142,7 +150,7 @@
         rgba(115, 115, 115, 0.8169861694677871) 75%,
         rgba(247, 247, 247, 0.517266281512605) 100%
     );
-    filter: blur(2px) brightness(0.5) grayscale(0.6);
+    filter: blur(0px) brightness(0.5) grayscale(0.6);
 }
 
 /* Contact Formulaire */
@@ -161,6 +169,50 @@
 }
 .alert {
     border-radius: 0;
+}
+
+.dashbPrestation {
+    min-height: 90vh;
+}
+
+.dashbPrestationRow {
+    min-height: 90vh;
+}
+
+.minH90 {
+    min-height: 90vh;
+}
+
+/* DASHBOARD */
+.svgDashboard {
+    fill: aliceblue;
+    position: absolute;
+    top: 0;
+    right: 20px;
+    height: 30px;
+    width: 30px;
+}
+.svgBlack {
+    fill: black;
+}
+
+.glassCard {
+    background: rgba(255, 255, 255, 0.574);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 10px;
+    padding: 20px;
+    height: 300px;
+}
+
+.cardLogo {
+    /* width: 60%; */
+    height: 60%;
+}
+
+.float-right {
+    float: right;
 }
 
 
