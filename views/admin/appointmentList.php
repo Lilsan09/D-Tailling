@@ -1,53 +1,39 @@
 <!-- affichage des rendez-vous de tout les utilisateurs -->
 <?php
-require_once(__DIR__ . '/../../config/config.php');
+
 if (SessionFlash::exist()) {
 ?>
-   <div class="alert alert-primary" role="alert">
+   <div class="alert alert-dark alert-dismissible fade show text-light" role="alert">
       <strong><?= SessionFlash::get() ?></strong>
+      <button type="button" class="btn-close closeAlertBtn" data-bs-dismiss="alert" aria-label="Close"></button>
    </div>
 
 <?php } ?>
 
-<?php
-?>
-
-<div class="container-fluid bg-dark minH90 h-100 d-flex align-items-center">
-   <div class="row">
-      <h1>Liste des rendez-vous</h1>
-      <table class="table table-striped my-5 px-5">
-         <thead>
-            <tr>
-               <th scope="col" class="text-secondary">Client</th>
-               <th scope="col" class="text-secondary">Date et Heure</th>
-               <th scope="col" class="text-secondary">Prestation</th>
-               <th scope="col" class="text-secondary">Véhicule</th>
-               <th scope="col" class="text-secondary">modif</th>
-               <th scope="col" class="text-secondary">suppr</th>
-            </tr>
-         </thead>
-         <tbody>
-            <?php
-            foreach ($appointments as $appointment) {
-            ?>
-               <tr>
-                  <td><?= htmlentities($appointment->users) ?></td>
-                  <td><?= htmlentities($appointment->datehour) ?></td>
-                  <td><?= htmlentities($appointment->title) ?></td>
-                  <td><?= htmlentities($appointment->type) ?></td>
-                  <td>
-                     <a href="/controllers/admin/editAppointmentCtrl.php?id=<?= $appointment->Id_appointment ?>">Modif</a>
-                  </td>
-                  <td>
-                     <a href="/controllers/admin/deleteAppointmentCtrl.php?id=<?= $appointment->Id_appointment ?>">suppr</a>
-                  </td>
-               </tr>
-            <?php } ?>
-         </tbody>
-      </table>
-      <a class="text-center" href="/controllers/admin/addAppointmentCtrl.php">
-         <button class="btn btn-primary" type="button">Ajouter un rendez-vous</button>
-      </a>
-   </div>
+<div class="container-fluid bg-dark minH90 h-100 d-flex  flex-column px-5">
+   <h1 class="py-4 text-secondary text-center">Liste des rendez-vous</h1>
+   <div class="row p-4 justify-content-center">
+      
+      
+      <?php
+      foreach ($appointments as $appointment) {
+         ?>
+         <div class="card bg-secondary text-dark m-3 col-lg-4 align-items-center">
+            <div class="card-body">
+               <h4 class="card-title">Client : <?= htmlentities($appointment->users)?></h4>
+               <h6 class="card-text">Date : <?= htmlentities(ucfirst($formatDateFr->format(strtotime($appointment->datehour))) . ' à ' . $formatHourFr->format(strtotime($appointment->datehour))) ?></h6>
+               <h6 class="card-text">Prestation : <?= htmlentities($appointment->title) ?></h6>
+               <p class="card-text">Véhicule : <?= htmlentities($appointment->type) ?></p>
+               <div class="d-flex justify-content-center">
+                  <a href="/controllers/admin/editAppointmentCtrl.php?id=<?= $appointment->Id_appointments ?>" class="card-link text-center"><img class="editSupprIcon" src="/public/assets/img/crayon.png" alt="Modifier"></a>
+                  <a href="/controllers/admin/deleteAppointmentCtrl.php?id=<?= $appointment->Id_appointments ?>" class="card-link text-center"><img class="editSupprIcon" src="/public/assets/img/supprimer.png" alt="Supprimer"></a>
+               </div>
+            </div>
+         </div>
+         <?php } ?>
+         <a class="text-center my-4" href="/controllers/admin/addAppointmentCtrl.php">
+            <button class="btn btn-primary text-dark" type="button">Ajouter un rendez-vous</button>
+         </a>
+      </div>
 
 </div>

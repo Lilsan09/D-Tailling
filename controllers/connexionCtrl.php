@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . '/../config/config.php');
 require_once(__DIR__ . '/../models/User.php');
+require_once(__DIR__ . '/../helpers/SessionFlash.php');
 
 try {
    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -21,24 +22,31 @@ try {
       }
       // /////////////// MOT DE PASSE //////////////////
       $user = User::loginByMail($email);
-      //$password_hash = $user->getPassword();
-      $password_hash = $user->password;
-      $result = password_verify($password, $password_hash);
-      if (!$result) {
-         $errors['password'] = 'Les informations des connexion ne sont pas bonnes!';
-      }
-
-      if (empty($errors)) {
-         //$user->setPassword(null);
-         $user->password = null;
-         $_SESSION['user'] = $user;
-         header('Location: /controllers/homeCtrl.php');
-         exit();
+      // test si l'utilisateur existe
+      if (!$user) {
+         $errors['connexion'] = 'Adresse mail inconnue';
+      } else {
+         // Si il n'y a pas d'erreurs et que l'utilisateur a valider son compte, on connecte l'utilisateur.
+         $password_hash = $user->password;
+         $result = password_verify($password, $password_hash);
+         if (!$result) {
+            $errors['connexion'] = 'Les informations des connexion ne sont pas bonnes!';
+         }
+         if ($user->valided_at != null) {
+            if (empty($errors)) {
+               $user->password = null;
+               $_SESSION['user'] = $user;
+               header('Location: /controllers/homeCtrl.php');
+               exit;
+            }
+            // Sinon on le renvoie sur la page de connexion.
+         } else {
+            $errors['connexion'] = 'Vous devez valider votre compte avant de vous connecter.';
+         }
       }
    }
 } catch (PDOException $e) {
    die('Erreur : ' . $e->getMessage());
-
 }
 include(__DIR__ . '/../views/templates/header.php');
 include(__DIR__ . '/../views/connexion.php');

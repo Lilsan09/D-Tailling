@@ -6,9 +6,14 @@ require_once(__DIR__ . '/../../helpers/database.php');
 
 
 try {
-   if ($_SESSION['user']->role != 1) {
-      header('location: /controllers/homeCtrl.php');
+   if (!isset($_SESSION['user'])) {
+      header('location: /controllers/connexionCtrl.php');
       exit;
+   } else {
+      if ($_SESSION['user']->role != 1) {
+         header('location: /controllers/homeCtrl.php');
+         exit;
+      }
    }
    // Ajout d'une prestation
    if ($_SERVER['REQUEST_METHOD'] == 'POST') {

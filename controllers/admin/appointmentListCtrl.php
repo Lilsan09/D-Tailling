@@ -5,6 +5,7 @@ require_once(__DIR__ . '/../../helpers/database.php');
 require_once(__DIR__ . '/../../helpers/SessionFlash.php');
 require_once(__DIR__ . '/../../models/Appointment.php');
 require_once(__DIR__ . '/../../models/Car.php');
+
 $appointments = Appointment::displayAllByDate();
 
 include(__DIR__.'/../../views/templates/sidebar.php');

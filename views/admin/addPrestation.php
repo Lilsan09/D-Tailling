@@ -1,5 +1,5 @@
 <!-- formulaire d'ajout de prestation -->
-<form class="connexionForm container-fluid d-flex align-items-center justify-content-center" method="POST" enctype="multipart/form-data" novalidate>
+<form class="connexionForm container-fluid d-flex align-items-center justify-content-center" method="POST" enctype="multipart/form-data" >
    <fieldset class="row justify-content-center glassForm my-4 flex-column align-items-center">
       <legend class="text-center">Ajouter une prestation</legend>
       <div class="col-lg-6">
@@ -10,7 +10,7 @@
          </div>
          <div class="form-group">
             <label for="price" class="form-label mt-4 ">Prix</label>
-            <input name="price" type="number" class="form-control" id="price" required>
+            <input name="price" type="number" class="form-control" id="price" pattern="<?= REGEX_NUMBER ?>" required>
          </div>
       </div>
       <div class="form-group col-lg-6">

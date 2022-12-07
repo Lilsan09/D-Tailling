@@ -1,75 +1,45 @@
-<?php if (isset($errorsArray['global'])) { ?>
+<?php
 
-   <div class="alert alert-warning" role="alert">
-      <?= nl2br($errorsArray['global']) ?>
+if (SessionFlash::exist()) {
+?>
+   <div class="alert alert-dark alert-dismissible fade show text-light" role="alert">
+      <strong><?=SessionFlash::get()?></strong>
+      <button type="button" class="btn-close closeAlertBtn" data-bs-dismiss="alert" aria-label="Close"></button>
    </div>
 
-<?php } else { ?>
-
-   <?php
-   if (SessionFlash::exist()) {
-   ?>
-      <div class="alert alert-primary" role="alert">
-         <strong><?= SessionFlash::get() ?></strong>
-      </div>
-
-   <?php } ?>
-
-   <?php
-   ?>
+<?php } ?>
 
    <div class="container-fluid bg-dark minH90">
-      <form class="container-fluid m-4 bg-dark">
-         <h1 class="text-secondary my-4">Liste des utilisateurs</h1>
-         <div class="row mb-4">
+      <form class="my-4 bg-dark">
+         <div class="row justify-content-center">
+            <h1 class="text-secondary my-4 text-center">Liste des utilisateurs</h1>
             <div class="col-8">
                <div class="form-floating">
                   <input type="search" value="<?= $s ?? '' ?>" id="s" class="form-control" name="s" placeholder="Dupond" />
-                  <label for="s" class="form-label">Recherche</label>
+                  <label for="s" class="form-label"></label>
                </div>
             </div>
-            <button class="btn btn-primary col-3" type="submit">Rechercher</button>
-            <div class="col-4">
+            <button class="btn btn-sm btn-primary col-2 col-lg-1" type="submit"><img src="/public/assets/img/loupe.png" alt="Rechercher"></button>
+         </div>
+      </form>
+      <div class="row justify-content-center p-4">
+         <?php
+      foreach ($users as $user) {
+         ?>
+         <div class="card bg-secondary text-dark m-3 col-lg-4 align-items-center">
+            <div class="card-body">
+               <h5 class="card-text">Nom :  <?= htmlentities($user->lastname)?></h5>
+               <h5 class="card-text">Prénom : <?= htmlentities($user->firstname) ?></h5>
+               <h6 class="card-text">Email : <?= htmlentities($user->email) ?></h6>
+               <h6 class="card-text">Adresse : <?= htmlentities($user->adress) ?></h6>
+               <h6 class="card-text">Code Postal : <?= htmlentities($user->zipcode) ?></h6>
+               <div class="d-flex justify-content-center">
+                  <a href="/controllers/admin/editUserCtrl.php?id=<?= $user->Id_users ?>" class="card-link text-center"><img class="editSupprIcon" src="/public/assets/img/crayon.png" alt="Modifier"></a>
+                  <a href="/controllers/admin/deleteUserCtrl.php?id=<?= $user->Id_users ?>" class="card-link text-center"><img class="editSupprIcon" src="/public/assets/img/supprimer.png" alt="Supprimer"></a>
+               </div>
             </div>
          </div>
-
-
-      </form>
-      <div class="row">
-         <table class="table table-striped">
-            <thead>
-               <tr>
-                  <th scope="col" class="text-secondary">Prénom</th>
-                  <th scope="col" class="text-secondary">Nom</th>
-                  <th scope="col" class="text-secondary">Email</th>
-                  <th scope="col" class="text-secondary">Adresse</th>
-                  <th scope="col" class="text-secondary">C.Postal</th>
-                  <th scope="col" class="text-secondary">modif</th>
-                  <th scope="col" class="text-secondary">suppr</th>
-
-               </tr>
-            </thead>
-            <tbody>
-
-               <?php
-               foreach ($users as $user) {
-               ?>
-                  <tr>
-                     <td><?= htmlentities($user->firstname) ?></td>
-                     <td><?= htmlentities($user->lastname) ?></td>
-                     <td><a href="mailto:<?= htmlentities($user->email) ?>"><?= htmlentities($user->email) ?></a></td>
-                     <td><?= htmlentities($user->adress) ?></td>
-                     <td><?= htmlentities($user->zipcode) ?></td>
-                     <td>
-                        <a href="/controllers/admin/editUserCtrl.php?id=<?= $user->Id_users ?>">Modif</a>
-                     </td>
-                     <td>
-                        <a href="/controllers/admin/deleteUserCtrl.php?id=<?= $user->Id_users ?>">suppr</a>
-                     </td>
-                  </tr>
-               <?php } ?>
-            </tbody>
-         </table>
+         <?php } ?>
       </div>
       <nav class="col-12 d-flex justify-content-center">
          <ul class="pagination pagination-sm bg-dark shadow-none">
@@ -90,4 +60,3 @@
       </nav>
 
    </div>
-<?php } ?>

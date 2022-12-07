@@ -1,5 +1,5 @@
 <!-- formulaire de prise de rendez-vous -->
-<form class="connexionForm container-fluid d-flex align-items-center justify-content-center" method="POST" novalidate>
+<form class="connexionForm container-fluid d-flex align-items-center justify-content-center" method="POST">
    <fieldset class="row justify-content-center glassForm my-4 flex-column align-items-center text-dark">
       <legend class="text-center">Prendre un rendez-vous</legend>
       <div class="col-lg-6 form-group">
@@ -18,7 +18,6 @@
       <div class="col-lg-6 form-group">
          <label for="prestations" class="form-label mt-4 ">Choix de la prestation</label>
          <select name="prestations" class="form-control" id="prestations" required>
-            <option value=""></option>
             <?php foreach ($prestations as $prestation) { ?>
                <option value="<?= $prestation->Id_prestations ?>"><?= $prestation->title ?></option>
             <?php } ?>
@@ -33,6 +32,6 @@
             <?php } ?>
          </select>
       </div>
-      <button type="submit" class="mt-4 btn col-lg-3">Prendre le rendez-vous</button>
+      <button type="submit" class="mt-4 btn col-lg-3 text-dark bg-light">Prendre le rendez-vous</button>
    </fieldset>
 </form>

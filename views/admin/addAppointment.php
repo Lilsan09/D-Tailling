@@ -1,32 +1,44 @@
-<!-- formulaire de prise de rendez-vous -->
-<form class="connexionForm container-fluid d-flex align-items-center justify-content-center" method="POST" enctype="multipart/form-data" novalidate>
-   <fieldset class="row justify-content-center glassForm my-4 flex-column align-items-center">
-      <legend class="text-center">Prendre un rendez-vous</legend>
-      <div class="col-lg-6">
-         <div class="form-group">
-            <label for="dateHour" class="form-label mt-4">Date et heure</label>
-            <input value="<?= $dateHour ?? '' ?>" name="dateHour" type="datetime-local" class="form-control" id="dateHour" aria-describedby="dateHourHelp" required>
-            <p><?= $errors['dateHour'] ?? ''; ?></p>
-         </div>
-         <div class="form-group">
-            <label for="id_users" class="form-label mt-4 ">Utilisateur</label>
-            <select name="id_users" class="form-control" id="id_users" required>
-               <option value="">Choisissez un utilisateur</option>
-               <?php foreach ($users as $user) : ?>
-                  <option value="<?= $user->getId() ?>"><?= $user->getFirstname() . ' ' . $user->getLastname() ?></option>
-               <?php endforeach; ?>
-            </select>
-         </div>
-      </div>
-      <div class="form-group">
-         <label for="id_prestations" class="form-label mt-4 ">Prestation</label>
-         <select name="id_prestations" class="form-control" id="id_prestations" required>
-            <option value="">Choisissez une prestation</option>
-            <?php foreach ($prestations as $prestation) : ?>
-               <option value="<?= $prestation->getId() ?>"><?= $prestation->getTitle() ?></option>
-            <?php endforeach; ?>
+<form class="container-fluid d-flex align-items-center justify-content-center" method="POST" >
+   <fieldset class="row justify-content-center glassForm bg-dark my-4 flex-column align-items-center text-dark">
+      <legend class="text-center">Création d'un rendez-vous</legend>
+      <div class="col-lg-6 form-group text-light">
+         <label for="user">Utilisateur du rendez-vous</label>
+         <select class="form-control" id="user" name="user">
+            <?php foreach ($users as $user) { ?>
+               <option <?= ($user == $user->Id_users) ? 'selected' : '' ?> value="<?= $user->Id_users ?>"><?= $user->firstname . ' ' . $user->lastname ?></option>
+            <?php } ?>
          </select>
       </div>
-      <button type="submit" class="btn btn-primary btn-sm col-lg-3">Prendre le rendez-vous</button>
+      <div class="col-lg-6 form-group text-light">
+         <label for="date" class="form-label mt-4">Date du rendez-vous</label>
+         <input value="<?= $date ?? '' ?>" name="date" type="date" class="form-control" id="date" aria-describedby="dateHelp" pattern="<?= REGEX_DATE ?>" required>
+         <p><?= $errors['date'] ?? ''; ?></p>
+      </div>
+      <div class="col-lg-6 form-group text-light">
+         <label for="hour">Heure du rendez-vous</label>
+         <select name="hour" class="form-control" id="hour">
+            <?php foreach ($hoursAppt as $hourAppt) { ?>
+               <option <?= (isset($hour) && $hour == $hourAppt) ? 'selected' : '' ;?> value="<?= $hourAppt ?>"><?= $hourAppt ?></option>
+            <?php } ?>
+         </select>
+      </div>
+      <div class="col-lg-6 form-group text-light">
+         <label for="prestations" class="form-label mt-4 ">Prestation</label>
+         <select name="prestations" class="form-control" id="prestations" required>
+            <!-- <option value=""></option> -->
+            <?php foreach ($prestations as $prestationType) { ?>
+               <option  <?= (isset($prestation) && $prestation == $prestationType) ? 'selected' : '' ;?>  value="<?= $prestationType->Id_prestations ?>"><?= $prestationType->title ?></option>
+            <?php } ?>
+         </select>
+      </div>
+      <div class="col-lg-6 form-group text-light">
+         <label for="cars" class="form-label mt-4 ">Type de véhicule</label>
+         <select name="cars" class="form-control" id="cars" required>
+            <?php foreach ($cars as $carType) { ?>
+               <option <?= (isset($car) && $car == $carType) ? 'selected' : '' ;?> value="<?=$carType->Id_cars?>"><?=$carType->type?></option>
+            <?php } ?>
+         </select>
+      </div>
+      <button type="submit" class="mt-4 btn col-lg-3">Créer le rendez-vous</button>
    </fieldset>
 </form>

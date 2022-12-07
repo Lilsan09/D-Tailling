@@ -2,8 +2,7 @@
 require_once(__DIR__ . '/../config/config.php');
 require_once(__DIR__ . '/../helpers/database.php');
 
-class Appointment
-{
+class Appointment {
    private $id;
    private $dateHour;
    private $id_users;
@@ -70,24 +69,30 @@ class Appointment
             $sth->execute();
          }
       // Méthode pour supprimer un rendez-vous
-         public function delete(){
-            $sth = Database::getInstance()->prepare('DELETE FROM `appointments` WHERE `id` = :id');
-            $sth->bindValue(':id', $this->id, PDO::PARAM_INT);
-            $sth->execute();
+         public static function delete($id){
+            $sth = Database::getInstance()->prepare('DELETE FROM `appointments` WHERE `Id_appointments` = :id');
+            $sth->bindValue(':id', $id, PDO::PARAM_INT);
+            if ($sth->execute()) {
+               $result = $sth->rowCount();
+               return ($result >= 1) ? true : false;
+            }
          }
       // Méthode pour modifier un rendez-vous
          public function modify(){
-            $sth = Database::getInstance()->prepare('UPDATE `appointments` SET `dateHour` = :dateHour, `Id_users` = :id_users, `Id_prestations` = :id_prestations, `Id_cars` = :id_cars WHERE `id` = :id');
+            $sth = Database::getInstance()->prepare('UPDATE `appointments` SET `dateHour` = :dateHour, `Id_users` = :id_users, `Id_prestations` = :id_prestations, `Id_cars` = :id_cars WHERE `Id_appointments` = :id');
             $sth->bindValue(':dateHour', $this->dateHour, PDO::PARAM_STR);
             $sth->bindValue(':id_users', $this->id_users, PDO::PARAM_INT);
             $sth->bindValue(':id_prestations', $this->id_prestations, PDO::PARAM_INT);
             $sth->bindValue(':id_cars', $this->id_cars, PDO::PARAM_INT);
             $sth->bindValue(':id', $this->id, PDO::PARAM_INT);
-            $sth->execute();
+            if ($sth->execute()) {
+               $result = $sth->rowCount();
+               return ($result >= 1) ? true : false;
+            }
          }
       // Méthode pour afficher tout les rendez-vous trier par date (dashboard admin)
          public static function displayAllByDate(){
-            $sth = Database::getInstance()->prepare('SELECT `c`.`type`, `p`.`title`, `a`.`datehour`, CONCAT(`u`.`lastname`," ", `u`.`firstname`) AS `users` FROM `users` AS `u`, `appointments` AS `a`, `cars` AS `c`, `prestations` AS `p` WHERE `a`.`Id_cars` = `c`.`Id_cars` AND `a`.`Id_prestations` = `p`.`Id_prestations` AND `a`.`Id_users` = `u`.`Id_users` ORDER BY `a`.`dateHour` ASC;');
+            $sth = Database::getInstance()->prepare('SELECT `c`.`type`, `p`.`title`, `a`.`datehour`, `a`.`Id_appointments`, CONCAT(`u`.`lastname`," ", `u`.`firstname`) AS `users` FROM `users` AS `u`, `appointments` AS `a`, `cars` AS `c`, `prestations` AS `p` WHERE `a`.`Id_cars` = `c`.`Id_cars` AND `a`.`Id_prestations` = `p`.`Id_prestations` AND `a`.`Id_users` = `u`.`Id_users` ORDER BY `a`.`dateHour` ASC;');
             $sth->execute();
             $appointments = $sth->fetchAll(PDO::FETCH_OBJ);
             return $appointments;
@@ -97,7 +102,7 @@ class Appointment
             $sth = Database::getInstance()->prepare('SELECT * FROM `appointments` WHERE `id` = :id');
             $sth->bindValue(':id', $id, PDO::PARAM_INT);
             $sth->execute();
-            $appointment = $sth->fetch(PDO::FETCH_ASSOC);
+            $appointment = $sth->fetch(PDO::FETCH_OBJ);
             return $appointment;
          }
       // Méthode pour afficher tout les rendez-vous d'un utilisateur trier par date (coté user)
@@ -107,6 +112,15 @@ class Appointment
             $sth->execute();
             $appointments = $sth->fetchAll(PDO::FETCH_OBJ);
             return $appointments;
+         }
+
+      // Méthode pour récuperer un rendez-vous grace a son id
+         public static function getById($id){
+            $sth = Database::getInstance()->prepare('SELECT * FROM `appointments` WHERE `Id_appointments` = :id');
+            $sth->bindValue(':id', $id, PDO::PARAM_INT);
+            $sth->execute();
+            $appointment = $sth->fetch(PDO::FETCH_OBJ);
+            return $appointment;
          }
       // Méthode pour afficher tout les rendez-vous d'un utilisateur
          // public static function displayAllByUser($id_users){

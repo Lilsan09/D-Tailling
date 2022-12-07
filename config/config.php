@@ -21,6 +21,8 @@ define('REGEX_PHONE', '^(\+33|0|0033)[1-9]((\-|\/|\.)?\d{2}){4}$');
 define('REGEX_DATE_HOUR', "^\d{4}-\d{2}-\d{1,2}$");
 // regex pour les noms d'utilisateur
 define('REGEX_USERNAME', '^[A-Za-zéèêëàâäôöûüç\' ]+$');
+// regex pour un nombre entier
+define('REGEX_NUMBER', '^[0-9.,]+$');
 
 
 // On definit le nombre d'éléments par page
@@ -31,6 +33,11 @@ define('NB_ELEMENTS_BY_PAGE', 10);
 define('DSN', 'mysql:host=localhost;dbname=d-tailing;charset=utf8;port=3306');
 define('USER', 'admin');
 define('PWD', 'admin');
+
+define('SITE_NAME', 'D-Tailing');
+define('EMAIL', 'dtailingfrance@gmail.com');
+
+define ('SECRET_KEY', 'fsdh&éé"&"&éff444dsf54q6fs`dsffsdqhg:::!dsq');
 
 // DECLARATION DU TABLEAU D'HORRAIRES
 $hoursAppt = [
@@ -53,10 +60,10 @@ $formatDateFr = new IntlDateFormatter(
 );
 $formatHourFr = new IntlDateFormatter(
    'fr_FR',
-   IntlDateFormatter::FULL,
-   IntlDateFormatter::FULL,
-   'Europe/Paris',
-   IntlDateFormatter::GREGORIAN,
+   IntlDateFormatter::SHORT,
+   IntlDateFormatter::SHORT,
+   NULL,
+   IntlDateFormatter::TRADITIONAL,
    "HH'h'",
 );
 
