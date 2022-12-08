@@ -134,8 +134,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          header('location: /controllers/admin/userListCtrl.php');
          exit;
       } else {
-         var_dump('erreur');
-         die;
+         SessionFlash::set('Une erreur est survenue, l\'utilisateur n\'a pas été modifié');
+         header('location: /controllers/admin/userListCtrl.php');
+         exit;
       }
    }
 include(__DIR__ . '/../../views/templates/sidebar.php');

@@ -28,7 +28,6 @@ try {
 
    // Appel des prestations
    $prestations = Prestation::displayAll();
-   // var_dump($prestations[0]->Id_prestations);
 
 
 
@@ -66,8 +65,7 @@ try {
       if (empty($errors)) {
          $dateHour = $date . ' ' . $hour;
       }
-      // var_dump($dateHour);
-      // die;
+      
       // ********** FIN DATE ET HEURE DE RDV **********
 
       $id_prestations = intval(filter_input(INPUT_POST, 'prestations', FILTER_SANITIZE_NUMBER_INT));

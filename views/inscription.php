@@ -37,7 +37,7 @@
       </div>
       <div class="form-group col-lg-6">
          <label for="zipcode" class="form-label mt-4 ">Code Postal</label>
-         <input value="<?= $zipcode ?? ''?>" name="zipcode" type="number" class="form-control" id="zipcode" placeholder="80000.." pattern="<?= REGEX_ZIPCODE ?>" required>
+         <input value="<?= $zipcode ?? ''?>" name="zipcode" type="text" class="form-control" id="zipcode" placeholder="80000.." pattern="<?= REGEX_ZIPCODE ?>" required>
          <p><?= $errors['zipcode'] ?? '' ;?></p>
       </div>
       <button type="submit" class="btn btn-primary btn-sm col-4 bg-light text-dark">Inscription</button>

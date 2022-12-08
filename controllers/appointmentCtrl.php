@@ -16,7 +16,7 @@ try {
 
    // Appel des prestations
    $prestations = Prestation::displayAll();
-   // var_dump($prestations[0]->Id_prestations);
+
 
 
 
